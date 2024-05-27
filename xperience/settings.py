@@ -27,7 +27,7 @@ DEBUG = os.environ['DEBUG']
 
 SECRET_KEY =  os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'phonenumber_field',
+    'django.contrib.gis',
     'rest_framework',
     'rest_framework.authtoken',
     'drfpasswordless',
@@ -60,9 +61,9 @@ PASSWORDLESS_AUTH = {
    'PASSWORDLESS_MOBILE_NOREPLY_NUMBER': '+14793485743'
 }
 
-TWILIO_ACCOUNT_SID = os.environ("TWILIO_ACCOUNT_SID")
-TWILIO_AUTH_TOKEN = os.environ("TWILIO_AUTH_TOKEN")
-TWILIO_PHONE_NUMBER= os.environ("TWILIO_PHONE_NUMBER")
+TWILIO_ACCOUNT_SID = os.environ["TWILIO_ACCOUNT_SID"]
+TWILIO_AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
+TWILIO_PHONE_NUMBER= os.environ["TWILIO_PHONE_NUMBER"]
 
 
 MIDDLEWARE = [
@@ -103,6 +104,9 @@ DATABASES = {
     'default': dj_database_url.config('DATABASE_URL')  
 }
 
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ['DATABASE_URL'], engine='django.contrib.gis.db.backends.postgis')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
